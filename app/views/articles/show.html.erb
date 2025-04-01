@@ -1,0 +1,21 @@
+<h1><%= @article.title %></h1>
+
+<p><%= @article.body %></p>
+
+<div id="btn">
+    <%= link_to "Home", articles_path, class: "btn back-btn" %>
+    <%= link_to "Edit", edit_article_path(@article), class: "btn edit-btn" %>
+    <%= link_to "Delete", article_path(@article), 
+        data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, 
+        class: "btn destroy-btn" %>
+</div>
+
+<div>
+    <h3>Comments:</h3>
+    <%= render @article.comments %>
+</div>
+
+<div>
+    <h3>Leave a comment:</h3>
+    <%= render "comments/form", article: @article %>
+</div>

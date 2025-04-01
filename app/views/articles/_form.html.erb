@@ -1,0 +1,21 @@
+<%= form_with model: article, class: "article-form" do |form| %>
+  <div>
+    <%= form.label :title %>
+    <%= form.text_field :title, class: "input-field" %>
+    <% article.errors.full_messages_for(:title).each do |message| %>
+      <div class="error-message"><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :body %>
+    <%= form.text_area :body, class: "input-field" %>
+    <% article.errors.full_messages_for(:body).each do |message| %>
+      <div class="error-message"><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit "Save Article", class: "submit-button" %>
+  </div>
+<% end %>
