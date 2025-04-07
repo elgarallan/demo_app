@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :set_id, only: %i[show edit update destroy]
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   def index
     @articles = Article.all
@@ -48,5 +49,9 @@ class ArticlesController < ApplicationController
 
     def set_id
       @article = Article.find(params[:id])
+    end
+
+    def record_not_found
+      redirect_to articles_path, notice: "Record does not exist."
     end
 end
