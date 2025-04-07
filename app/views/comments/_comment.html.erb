@@ -3,6 +3,7 @@
     <strong><%= comment.commenter %>:</strong>
     <%= comment.body %> 
     <br>
+    <%= link_to "Show", article_comment_path(@article, comment) %> |
     <%= link_to "Edit", edit_article_comment_path(comment.article, comment) %> |
     <%= link_to "Delete", article_comment_path(comment.article, comment), 
         data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this comment?" } %>
