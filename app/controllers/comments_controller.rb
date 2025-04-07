@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_article_id
-  before_action :set_comment, only: [ :edit, :update, :destroy ]
+  before_action :set_comment, only: [ :show, :edit, :update, :destroy ]
 
   def index
     @comments = @article.comments
@@ -17,9 +17,7 @@ class CommentsController < ApplicationController
     end
   end
 
-  def show
-    @comment = Comment.find(params[:id])
-  end
+  def show; end
 
   def edit; end
 
