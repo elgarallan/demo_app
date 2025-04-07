@@ -5,7 +5,9 @@ class ArticlesController < ApplicationController
     @articles = Article.all
   end
 
-  def show; end
+  def show
+    @comment = @article.comments.new
+  end
 
   def new
     @article = Article.new
@@ -15,8 +17,9 @@ class ArticlesController < ApplicationController
     @article = Article.new(article_params)
 
     if @article.save
-      redirect_to @article
+      redirect_to @article, notice: "Article created successfully."
     else
+      flash.alert = "Unable to create article."
       render :new, status: :unprocessable_entity
     end
   end
@@ -25,8 +28,9 @@ class ArticlesController < ApplicationController
 
   def update
     if @article.update(article_params)
-      redirect_to @article
+      redirect_to @article, notice: "Article updated successfully."
     else
+      flash.alert = "Unable to update article."
       render :edit, status: :unprocessable_entity
     end
   end
@@ -34,7 +38,7 @@ class ArticlesController < ApplicationController
   def destroy
     @article.destroy
 
-    redirect_to root_path, status: :see_other
+    redirect_to root_path, notice: "Article deleted successfully.", status: :see_other
   end
 
   private

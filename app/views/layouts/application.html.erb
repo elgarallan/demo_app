@@ -24,11 +24,10 @@
 
   <body>
     <% flash.each do |type, msg| %>
-      <div style="display:flex; justify-content: center; color:blue">
-        <p><%= msg %></p>
+      <div style="display:flex; justify-content: center">
+        <p style="color:red"><%= msg %></p>
       </div>
     <% end %>
-
 
     <%= yield %>
   </body>

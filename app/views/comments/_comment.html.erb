@@ -1,13 +1,10 @@
-<p>
-  <strong><%= comment.commenter %>:</strong>
-  <%= comment.body %>
-  <br>
-  <%= link_to "Edit", edit_article_comment_path(comment.article, comment), class: "text-blue-600 hover:underline" %> |
-  <%= link_to "Delete", article_comment_path(comment.article, comment), 
-      data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this comment?" },
-      class: "text-red-600 hover:underline" %>
-</p>
-
-<div class="mb-4 text-sm text-gray-600">
-  
-</div>
+<% if comment.persisted? %>
+  <p>
+    <strong><%= comment.commenter %>:</strong>
+    <%= comment.body %> 
+    <br>
+    <%= link_to "Edit", edit_article_comment_path(comment.article, comment) %> |
+    <%= link_to "Delete", article_comment_path(comment.article, comment), 
+        data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this comment?" } %>
+  </p>
+<% end %>

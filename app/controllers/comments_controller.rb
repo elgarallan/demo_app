@@ -7,9 +7,17 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = @article.comments.create(comment_params)
-    redirect_to article_path(@article), notice: "Comment was successfully created."
+    @comment = @article.comments.new(comment_params)
+
+    if @comment.save
+      redirect_to article_path(@article), notice: "Comment was successfully created."
+    else
+      flash.alert = "Unable to create comment."
+      render "articles/show", status: :unprocessable_entity
+    end
   end
+
+  def show; end
 
   def edit; end
 
@@ -17,6 +25,7 @@ class CommentsController < ApplicationController
     if @comment.update(comment_params)
       redirect_to article_path(@article), notice: "Comment was successfully updated."
     else
+      flash.alert = "Unable to update comment."
       render :edit, status: :unprocessable_entity
     end
   end
@@ -25,7 +34,6 @@ class CommentsController < ApplicationController
     @comment.destroy
     redirect_to article_path(@article), notice: "Comment was successfully deleted."
   end
-
 
   private
 
